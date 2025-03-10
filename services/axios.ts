@@ -40,9 +40,9 @@ api.interceptors.response.use(function (response) {
     return response
 
 }, function (error) {
-
+    const token = store.getState().auth.token;
     console.log('error interceptors:', error)
-    if (error.response && error.response.status === 403) {
+    if (error.response && error.response.status === 403 || token === undefined) {
         window.location.pathname = '/auth/login'
     }
 
