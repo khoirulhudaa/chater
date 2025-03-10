@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import Swal from 'sweetalert2';
 
-const socket = io('http://localhost:3600', {
+const socket = io('https://api-chater.vercel.app', {
     withCredentials: true,
     reconnection: true,
     reconnectionAttempts: 5
