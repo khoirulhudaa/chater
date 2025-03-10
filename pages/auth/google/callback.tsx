@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { authSignIn, saveToken } from '@/redux/authSlice';
 
-const GoogleLoginCallback = () => {
+const Callback = () => {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ const GoogleLoginCallback = () => {
     );
 };
 
-export default GoogleLoginCallback;
+export default Callback;
