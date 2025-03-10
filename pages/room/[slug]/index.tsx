@@ -26,6 +26,8 @@ const Room = () => {
     const slug = params?.slug as string | undefined; // Type assertion dengan pengecekan
     const decodedSlug = slug ? decodeURIComponent(slug) : "";
 
+    console.log('decode:', decodedSlug)
+
     const auth = useSelector((state: any) => state.auth.auth)
     const roomDetail = useSelector((state: any) => state.room.roomDetail)
     console.log('auth:', auth)
