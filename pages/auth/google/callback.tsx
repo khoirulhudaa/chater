@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { authSignIn, saveToken } from '@/redux/authSlice';
+import ProviderMain from '@/redux/provider';
+import store from '@/redux/store';
+import { Loading01Icon } from 'hugeicons-react';
 
 const Callback = () => {
     const router = useRouter();
@@ -25,10 +28,15 @@ const Callback = () => {
     }, [router.query, dispatch]);
 
     return (
-        <div className='w-screen h-screen flex items-center justify-between bg-white text-black'>
+        <div className='w-screen h-screen flex flex-col items-center justify-center bg-white text-black'>
+            <Loading01Icon className='mb-2' width={50} height={50} />
             <h2 className='font-bold text-[46px]'>Tunggu sebentar, yak...</h2>
         </div>
     );
 };
 
-export default Callback;
+export default () => (
+    <ProviderMain store={store}>
+        <Callback />
+    </ProviderMain>
+);
