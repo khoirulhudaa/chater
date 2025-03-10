@@ -13,7 +13,7 @@ const Callback = () => {
     useEffect(() => {
         // Ambil data pengguna dari query string URL
         const { userData } = router.query;
-
+        console.log('userData:', userData)
         if (userData) {
             // Parse data JSON yang diterima dari URL
             const parsedData = JSON.parse(decodeURIComponent(userData as string));
