@@ -30,6 +30,7 @@ const Room = () => {
     const roomDetail = useSelector((state: any) => state.room.roomDetail)
     console.log('auth:', auth)
     console.log('roomDetail:', roomDetail)
+    console.log('messages1:', messages)
 
     useEffect(() => {
         if (socket.connected) {
@@ -100,6 +101,8 @@ const Room = () => {
             }
         });
     }
+
+    console.log('messages2:', messages)
 
     return (
         <div className='w-screen h-screen flex bg-gray-100'>
