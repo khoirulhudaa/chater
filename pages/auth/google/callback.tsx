@@ -25,8 +25,8 @@ const GoogleLoginCallback = () => {
     }, [router.query, dispatch]);
 
     return (
-        <div className='w-screen h-screen flex items-center justify-center'>
-            <h2 className='font-bold text-black text-[46px]'>Tunggu sebentar, yak...</h2>
+        <div className='w-screen h-screen flex items-center justify-between bg-white text-black'>
+            <h2 className='font-bold text-[46px]'>Tunggu sebentar, yak...</h2>
         </div>
     );
 };
