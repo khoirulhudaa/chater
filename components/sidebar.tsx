@@ -19,7 +19,7 @@ const Sidebar = () => {
     useEffect(() => {
         const getRooms = async () => {
             try {
-                const result = await api.get('http://localhost:3600/room/');
+                const result = await api.get('room/');
                 setRooms(result?.data?.data);
                 console.log('rooms', result?.data);
             } catch (error) {

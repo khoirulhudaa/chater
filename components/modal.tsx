@@ -25,16 +25,11 @@ const Modal = ({ onClose }: ModalState) => {
 
         const data = { idRoom: randomNum, name: room, description }
 
-        const result = await api.post('http://localhost:3600/room', data);
+        const result = await api.post('room', data);
         console.log('create room:', result)
         if (result.status === 201) {
-            const getRoom = await fetch('http://localhost:3600/room', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            const resultGet = await getRoom.json()
-            dispatch(getRooms(resultGet.data))
+            const getRoom = await api.get('room/');
+            dispatch(getRooms(getRoom.data.data))
 
             Swal.fire({
                 icon: 'success',

@@ -17,7 +17,6 @@ const Callback = () => {
         if (userData) {
             // Parse data JSON yang diterima dari URL
             const parsedData = JSON.parse(decodeURIComponent(userData as string));
-
             // Simpan data pengguna dan token di Redux
             dispatch(authSignIn(parsedData));
             dispatch(saveToken(parsedData.token));

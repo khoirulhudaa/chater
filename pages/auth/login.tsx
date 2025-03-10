@@ -1,6 +1,7 @@
 import { authSignIn, saveToken } from "@/redux/authSlice";
 import ProviderMain from "@/redux/provider";
 import store from "@/redux/store";
+import api from "@/services/axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -19,15 +20,15 @@ const Login = () => {
 
         e.preventDefault()
 
-        const auth = await fetch('https://api-chater.vercel.app/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, username })
-        });
-        const result = await auth.json();
-        if (result.status === 200) {
-            dispatch(authSignIn(result.data))
-            dispatch(saveToken(result.token))
+        const data = {
+            email,
+            username
+        }
+
+        const auth = await api.post('auth/login', data);
+        if (auth.data.status === 200) {
+            dispatch(authSignIn(auth.data.data))
+            dispatch(saveToken(auth.data.token))
             Swal.fire({
                 icon: 'success',
                 title: "Berhasil masuk",
@@ -46,11 +47,11 @@ const Login = () => {
                     Router.replace('/main/room')
                 }
             });
-            console.log('auth:', result)
+            console.log('auth:', auth.data)
         } else {
             Swal.fire({
                 icon: 'error',
-                text: result?.message,
+                text: auth?.data?.message,
                 showCancelButton: false,
                 showConfirmButton: false,
                 customClass: {
@@ -63,7 +64,7 @@ const Login = () => {
                 timer: 2000,
                 timerProgressBar: true,
             });
-            console.log('auth error:', result)
+            console.log('auth error:', auth.data.message)
         }
     }
 

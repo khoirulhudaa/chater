@@ -1,5 +1,6 @@
 import ProviderMain from "@/redux/provider";
 import store from "@/redux/store";
+import api from "@/services/axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -18,13 +19,9 @@ const Register = () => {
 
         const randomNum = Math.random().toString(36).substr(2, 5); // 5 karakter random
 
-        const auth = await fetch('https://api-chater.vercel.app/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idUser: `CHT-${randomNum}`.toUpperCase(), email, username })
-        });
-        const result = await auth.json();
-        if (result.status === 201) {
+        const data = { idUser: `CHT-${randomNum}`.toUpperCase(), email, username }
+        const auth = await api.post('auth/register', data);
+        if (auth?.data?.status === 201) {
             Swal.fire({
                 icon: 'success',
                 title: "Berhasil daftar",
@@ -41,11 +38,11 @@ const Register = () => {
                 timerProgressBar: true,
             });
             Router.push('/auth/login')
-            console.log('auth:', result)
+            console.log('auth:', auth?.data)
         } else {
             Swal.fire({
                 icon: 'error',
-                text: result?.message,
+                text: auth?.data?.message,
                 showCancelButton: false,
                 showConfirmButton: false,
                 customClass: {
@@ -58,7 +55,7 @@ const Register = () => {
                 timer: 2000,
                 timerProgressBar: true,
             });
-            console.log('auth error:', result)
+            console.log('auth error:', auth?.data?.message)
         }
     }
 
